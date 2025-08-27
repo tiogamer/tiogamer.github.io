@@ -1,507 +1,544 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catálogo de Juegos Playstation 2</title>
-  <style>
-    /* ESTILOS (CSS) */
-    body {
-      font-family: 'Roboto', sans-serif;
-      background-color: #ffffff;
-      margin: 0;
-      padding: 0;
-      font-size: 14px; /* Tamaño de fuente base */
-    }
-    
-    .main-wrapper {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 10px;
-    }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo de Juegos Playstation 2</title>
+  <style>
+    /* ESTILOS (CSS) */
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 0;
+      font-size: 14px; /* Tamaño de fuente base */
+    }
+    
+    .main-wrapper {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 10px;
+    }
 
-    .container {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-    }
-    
-    .main-content {
-      flex: 2;
-      background-color: #ffffff;
-      padding: 10px;
-      border-radius: 0;
-      box-shadow: none;
-      display: flex;
-      flex-direction: column;
-      box-sizing: border-box;
-    }
-    
-    .sagas-content {
-      flex: 1;
-      background-color: #ffffff;
-      padding: 10px;
-      border-radius: 0;
-      box-shadow: none;
-      box-sizing: border-box;
-    }
-    
-    h2, h3 {
-      color: #202124;
-      font-weight: 500;
-      padding-left: 5px;
-      margin: 5px 0;
-    }
-    
-    #search-bar {
-      width: 100%;
-      padding: 10px 15px;
-      margin: 5px 0;
-      box-sizing: border-box;
-      border: 1px solid #dadce0;
-      border-radius: 24px;
-      font-size: 14px;
-      outline: none;
-      transition: box-shadow 0.3s ease;
-    }
-    
-    #search-bar:focus {
-      box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
-      border-color: transparent;
-    }
-    
-    .game-list-container {
-      flex: 1;
-      overflow-y: auto;
-      margin-top: 10px;
-    }
+    .container {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    
+    .main-content {
+      flex: 2;
+      background-color: #ffffff;
+      padding: 10px;
+      border-radius: 0;
+      box-shadow: none;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+    }
+    
+    .sagas-content {
+      flex: 1;
+      background-color: #ffffff;
+      padding: 10px;
+      border-radius: 0;
+      box-shadow: none;
+      box-sizing: border-box;
+    }
+    
+    h2, h3 {
+      color: #202124;
+      font-weight: 500;
+      padding-left: 5px;
+      margin: 5px 0;
+    }
 
-    .game-list-table {
-      width: 100%;
-      border-collapse: collapse;
-      table-layout: fixed;
-    }
-    
-    .game-list-table th, .game-list-table td {
-      padding: 8px;
-      text-align: left;
-      border-bottom: 1px solid #dadce0;
-      font-size: 14px;
-      color: #5f6368;
-      word-wrap: break-word;
-    }
-    
-    .game-list-table th:first-child, .game-list-table td:first-child {
-      width: 60px;
-      min-width: 60px;
-    }
-    
-    .game-list-table th {
-      background-color: #f8f9fa;
-      color: #202124;
-      font-weight: 500;
-      position: sticky;
-      top: 0;
-    }
-    
-    .game-list-table tr:hover {
-      background-color: #f1f3f4;
-    }
-    
-    #suggestion {
-      color: #5f6368;
-      font-size: 14px;
-      margin-bottom: 5px;
-    }
-    
-    #suggestion a {
-      color: #1a73e8;
-      text-decoration: underline;
-      cursor: pointer;
-    }
-    
-    .saga-button {
-      display: inline-block;
-      padding: 6px 12px;
-      background-color: #e8f0fe;
-      color: #1a73e8;
-      border: none;
-      border-radius: 20px;
-      text-align: center;
-      text-decoration: none;
-      cursor: pointer;
-      transition: background-color 0.3s, transform 0.2s;
-      font-size: 12px;
-      margin-bottom: 5px;
-    }
-    
-    .saga-button:hover {
-      background-color: #d2e3fc;
-      transform: translateY(-2px);
-    }
+    .search-container {
+      position: relative;
+      width: 100%;
+      margin: 5px 0;
+    }
 
-    .sagas-accordion-button {
-      width: 100%;
-      background-color: #f8f9fa;
-      color: #202124;
-      cursor: pointer;
-      padding: 10px;
-      text-align: left;
-      border: none;
-      outline: none;
-      transition: 0.4s;
-      font-size: 16px;
-      font-weight: 500;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 10px;
-    }
-    
-    .sagas-accordion-button:after {
-      content: '\25B6';
-      font-size: 14px;
-      color: #777;
-      float: right;
-      margin-left: 5px;
-      transition: transform 0.2s;
-    }
+    #search-bar {
+      width: 100%;
+      padding: 10px 40px 10px 15px; /* Aumenta el padding para la "X" */
+      box-sizing: border-box;
+      border: 1px solid #dadce0;
+      border-radius: 24px;
+      font-size: 14px;
+      outline: none;
+      transition: box-shadow 0.3s ease;
+    }
+    
+    #search-bar:focus {
+      box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+      border-color: transparent;
+    }
 
-    .sagas-accordion-button.active:after {
-      transform: rotate(90deg);
-    }
+    #clear-search {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #9aa0a6;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: bold;
+      display: none;
+    }
+    
+    .game-list-container {
+      flex: 1;
+      overflow-y: auto;
+      margin-top: 10px;
+    }
 
-    .sagas-accordion-panel {
-      padding: 0 10px;
-      background-color: white;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.2s ease-out;
-    }
-    
-    .sagas-button-list {
-      padding-top: 10px;
-    }
-    
-    /* MEDIA QUERIES para pantallas más pequeñas (celulares) */
-    @media (max-width: 768px) {
-      body {
-        font-size: 12px; /* Reducción de tipografía en móvil */
-      }
-      .container {
-        flex-direction: column;
-      }
-      .main-content {
-        order: 2;
-      }
-      .sagas-content {
-        order: 1;
-        flex: none;
-        width: 100%;
-        margin-bottom: 0;
-      }
-      .sagas-content table {
-        display: none;
-      }
-      .sagas-content h3 {
-        display: none; /* Oculta el encabezado en móvil */
-      }
-      .sagas-content .sagas-accordion {
-        display: block;
-      }
-    }
-    
-    /* Mostrar tabla de sagas en desktop y ocultar acordeón */
-    @media (min-width: 769px) {
-      .sagas-content table {
-        display: table;
-      }
-      .sagas-content h3 {
-        display: block; /* Muestra el encabezado en escritorio */
-      }
-      .sagas-content .sagas-accordion {
-        display: none;
-      }
-    }
-  </style>
+    .game-list-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+    
+    .game-list-table th, .game-list-table td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #dadce0;
+      font-size: 14px;
+      color: #5f6368;
+      word-wrap: break-word;
+    }
+    
+    .game-list-table th:first-child, .game-list-table td:first-child {
+      width: 60px;
+      min-width: 60px;
+    }
+    
+    .game-list-table th {
+      background-color: #f8f9fa;
+      color: #202124;
+      font-weight: 500;
+      position: sticky;
+      top: 0;
+    }
+    
+    .game-list-table tr:hover {
+      background-color: #f1f3f4;
+    }
+    
+    #suggestion {
+      color: #5f6368;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+    
+    #suggestion a {
+      color: #1a73e8;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    
+    .saga-button {
+      display: inline-block;
+      padding: 6px 12px;
+      background-color: #e8f0fe;
+      color: #1a73e8;
+      border: none;
+      border-radius: 20px;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+      font-size: 12px;
+      margin-bottom: 5px;
+    }
+    
+    .saga-button:hover {
+      background-color: #d2e3fc;
+      transform: translateY(-2px);
+    }
+
+    .sagas-accordion-button {
+      width: 100%;
+      background-color: #f8f9fa;
+      color: #202124;
+      cursor: pointer;
+      padding: 10px;
+      text-align: left;
+      border: none;
+      outline: none;
+      transition: 0.4s;
+      font-size: 16px;
+      font-weight: 500;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+    }
+    
+    .sagas-accordion-button:after {
+      content: '\25B6';
+      font-size: 14px;
+      color: #777;
+      float: right;
+      margin-left: 5px;
+      transition: transform 0.2s;
+    }
+
+    .sagas-accordion-button.active:after {
+      transform: rotate(90deg);
+    }
+
+    .sagas-accordion-panel {
+      padding: 0 10px;
+      background-color: white;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.2s ease-out;
+    }
+    
+    .sagas-button-list {
+      padding-top: 10px;
+    }
+    
+    /* MEDIA QUERIES para pantallas más pequeñas (celulares) */
+    @media (max-width: 768px) {
+      body {
+        font-size: 12px; /* Reducción de tipografía en móvil */
+      }
+      .container {
+        flex-direction: column;
+      }
+      .main-content {
+        order: 2;
+      }
+      .sagas-content {
+        order: 1;
+        flex: none;
+        width: 100%;
+        margin-bottom: 0;
+      }
+      .sagas-content table {
+        display: none;
+      }
+      .sagas-content h3 {
+        display: none; /* Oculta el encabezado en móvil */
+      }
+      .sagas-content .sagas-accordion {
+        display: block;
+      }
+    }
+    
+    /* Mostrar tabla de sagas en desktop y ocultar acordeón */
+    @media (min-width: 769px) {
+      .sagas-content table {
+        display: table;
+      }
+      .sagas-content h3 {
+        display: block; /* Muestra el encabezado en escritorio */
+      }
+      .sagas-content .sagas-accordion {
+        display: none;
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <div class="main-wrapper">
-    <h2>Catálogo de Juegos</h2>
-    <div class="container">
-      <div class="main-content">
-        <input type="text" id="search-bar" placeholder="Buscar juego...">
-        <p id="suggestion"></p>
-        <div class="game-list-container">
-          <table id="game-list" class="game-list-table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Nombre del Juego</th>
-              </tr>
-            </thead>
-            <tbody>
-              </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="sagas-content">
-        <div class="sagas-accordion">
-          <button class="sagas-accordion-button">
-            Buscar por Saga
-          </button>
-          <div class="sagas-accordion-panel">
-            <div id="sagas-list" class="sagas-button-list">
-            </div>
-          </div>
-        </div>
-        <h3>Sagas</h3>
-        <table id="sagas-list-desktop" class="sagas-list-table">
-          <thead>
-            <tr>
-              <th>Nombre de Saga</th>
-            </tr>
-          </thead>
-          <tbody>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+  <div class="main-wrapper">
+    <h2>Catálogo de Juegos Playstation 2</h2>
+    <div class="container">
+      <div class="main-content">
+        <div class="search-container">
+          <input type="text" id="search-bar" placeholder="Buscar juego...">
+          <span id="clear-search">X</span>
+        </div>
+        <p id="suggestion"></p>
+        <div class="game-list-container">
+          <table id="game-list" class="game-list-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre del Juego</th>
+              </tr>
+            </thead>
+            <tbody>
+              </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="sagas-content">
+        <div class="sagas-accordion">
+          <button class="sagas-accordion-button">
+            Buscar por Saga
+          </button>
+          <div class="sagas-accordion-panel">
+            <div id="sagas-list" class="sagas-button-list">
+            </div>
+          </div>
+        </div>
+        <h3>Sagas</h3>
+        <table id="sagas-list-desktop" class="sagas-list-table">
+          <thead>
+            <tr>
+              <th>Nombre de Saga</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 
-  <script>
-    // URLs de los archivos CSV
-    const gamesUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQOta0Iul7oMjqb1dDNjWdBOtkHLdJvb6TycdY85ffXlopRJx5qLAjbpmQ6CfqOifWqUxygez6LSYig/pub?output=csv';
-    const sagasUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRTgF5vwoRBaohdO5YqZjZf8mUOMZ81NXMUpY9M_G6Jz6uPy8KtFTytGe0YN9D0GbCIGHJ_N9iJvJ3H/pub?output=csv';
+  <script>
+    // URLs de los archivos CSV
+    const gamesUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQOta0Iul7oMjqb1dDNjWdBOtkHLdJvb6TycdY85ffXlopRJx5qLAjbpmQ6CfqOifWqUxygez6LSYig/pub?output=csv';
+    const sagasUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRTgF5vwoRBaohdO5YqZjZf8mUOMZ81NXMUpY9M_G6Jz6uPy8KtFTytGe0YN9D0GbCIGHJ_N9iJvJ3H/pub?output=csv';
 
-    // --- FUNCIÓN DE DISTANCIA DE LEVENSHTEIN ---
-    function getSimilarity(str1, str2) {
-      const matrix = [];
-      if (str1.length === 0) return str2.length;
-      if (str2.length === 0) return str1.length;
-      for (let i = 0; i <= str2.length; i++) {
-        matrix[i] = [i];
-      }
-      for (let j = 0; j <= str1.length; j++) {
-        matrix[0][j] = j;
-      }
-      for (let i = 1; i <= str2.length; i++) {
-        for (let j = 1; j <= str1.length; j++) {
-          const cost = (str2.charAt(i - 1) === str1.charAt(j - 1)) ? 0 : 1;
-          matrix[i][j] = Math.min(
-            matrix[i - 1][j] + 1,
-            matrix[i][j - 1] + 1,
-            matrix[i - 1][j - 1] + cost
-          );
-        }
-      }
-      return matrix[str2.length][str1.length];
-    }
+    // --- FUNCIÓN DE DISTANCIA DE LEVENSHTEIN ---
+    function getSimilarity(str1, str2) {
+      const matrix = [];
+      if (str1.length === 0) return str2.length;
+      if (str2.length === 0) return str1.length;
+      for (let i = 0; i <= str2.length; i++) {
+        matrix[i] = [i];
+      }
+      for (let j = 0; j <= str1.length; j++) {
+        matrix[0][j] = j;
+      }
+      for (let i = 1; i <= str2.length; i++) {
+        for (let j = 1; j <= str1.length; j++) {
+          const cost = (str2.charAt(i - 1) === str1.charAt(j - 1)) ? 0 : 1;
+          matrix[i][j] = Math.min(
+            matrix[i - 1][j] + 1,
+            matrix[i][j - 1] + 1,
+            matrix[i - 1][j - 1] + cost
+          );
+        }
+      }
+      return matrix[str2.length][str1.length];
+    }
 
-    async function fetchData(url) {
-      const response = await fetch(url);
-      const text = await response.text();
-      return text.split('\n').slice(1).map(row => row.split(','));
-    }
+    async function fetchData(url) {
+      const response = await fetch(url);
+      const text = await response.text();
+      return text.split('\n').slice(1).map(row => row.split(','));
+    }
 
-    document.getElementById('search-bar').addEventListener('keyup', (event) => {
-      const searchTerm = event.target.value.toLowerCase();
-      filterGames(searchTerm);
-    });
+    // MODIFICACIÓN 1: Obtener referencias a la barra y el botón de borrado
+    const searchBar = document.getElementById('search-bar');
+    const clearButton = document.getElementById('clear-search');
 
-    let gamesData = [];
-    let sagasData = [];
-    let vocabulary = new Set();
+    // MODIFICACIÓN 2: Lógica para mostrar/ocultar el botón de borrado
+    searchBar.addEventListener('keyup', (event) => {
+      const searchTerm = event.target.value.toLowerCase();
+      filterGames(searchTerm);
+      if (searchTerm.length > 0) {
+        clearButton.style.display = 'block';
+      } else {
+        clearButton.style.display = 'none';
+      }
+    });
+    
+    // MODIFICACIÓN 3: Lógica para borrar el campo al hacer clic en el botón
+    clearButton.addEventListener('click', () => {
+      searchBar.value = '';
+      filterGames('');
+      clearButton.style.display = 'none';
+    });
 
-    async function loadData() {
-      gamesData = await fetchData(gamesUrl);
-      sagasData = await fetchData(sagasUrl);
-      buildVocabulary();
-      displaySagas(sagasData);
-      filterGames('');
-    }
+    let gamesData = [];
+    let sagasData = [];
+    let vocabulary = new Set();
 
-    function buildVocabulary() {
-      gamesData.forEach(game => {
-        const cleanedGameName = String(game[1]).toLowerCase().replace(/[^\w\s]/gi, ' ').trim();
-        const words = cleanedGameName.split(' ').filter(word => word.length > 2);
-        words.forEach(word => vocabulary.add(word));
-      });
-    }
+    async function loadData() {
+      gamesData = await fetchData(gamesUrl);
+      sagasData = await fetchData(sagasUrl);
+      buildVocabulary();
+      displaySagas(sagasData);
+      filterGames('');
+    }
 
-    function filterGames(searchTerm) {
-      const tbody = document.getElementById('game-list').querySelector('tbody');
-      const suggestionEl = document.getElementById('suggestion');
-      tbody.innerHTML = '';
-      suggestionEl.innerHTML = '';
+    function buildVocabulary() {
+      gamesData.forEach(game => {
+        const cleanedGameName = String(game[1]).toLowerCase().replace(/[^\w\s]/gi, ' ').trim();
+        const words = cleanedGameName.split(' ').filter(word => word.length > 2);
+        words.forEach(word => vocabulary.add(word));
+      });
+    }
 
-      const cleanedSearchTerm = searchTerm.toLowerCase().trim();
-      const searchWords = cleanedSearchTerm.split(' ').filter(word => word.length > 0);
-      const filterThreshold = 2;
+    function filterGames(searchTerm) {
+      const tbody = document.getElementById('game-list').querySelector('tbody');
+      const suggestionEl = document.getElementById('suggestion');
+      tbody.innerHTML = '';
+      suggestionEl.innerHTML = '';
 
-      if (searchWords.length === 0) {
-        displayGames(gamesData);
-        return;
-      }
+      const cleanedSearchTerm = searchTerm.toLowerCase().trim();
+      const searchWords = cleanedSearchTerm.split(' ').filter(word => word.length > 0);
+      const filterThreshold = 2;
 
-      const suggestedPhrase = findSuggestion(cleanedSearchTerm);
-      if (suggestedPhrase) {
-        suggestionEl.innerHTML = `¿Quizás quisiste decir: <a onclick="document.getElementById('search-bar').value = '${suggestedPhrase}'; filterGames('${suggestedPhrase.toLowerCase()}')">${suggestedPhrase}</a>?`;
-      }
+      if (searchWords.length === 0) {
+        displayGames(gamesData);
+        return;
+      }
 
-      const filteredGames = gamesData.filter(game => {
-        const cleanedGameName = String(game[1]).toLowerCase().replace(/[^\w\s]/gi, ' ').trim();
-        const gameNameWords = cleanedGameName.split(' ').filter(word => word.length > 0);
-        
-        return searchWords.every(searchWord => {
-          return gameNameWords.some(gameWord => {
-            return getSimilarity(searchWord, gameWord) <= filterThreshold;
-          });
-        });
-      });
+      const suggestedPhrase = findSuggestion(cleanedSearchTerm);
+      if (suggestedPhrase) {
+        suggestionEl.innerHTML = `¿Quizás quisiste decir: <a onclick="document.getElementById('search-bar').value = '${suggestedPhrase}'; filterGames('${suggestedPhrase.toLowerCase()}')">${suggestedPhrase}</a>?`;
+      }
 
-      if (filteredGames.length > 0) {
-        const sortedGames = filteredGames.sort((a, b) => {
-          const aName = String(a[1]).toLowerCase();
-          const bName = String(b[1]).toLowerCase();
+      const filteredGames = gamesData.filter(game => {
+        const cleanedGameName = String(game[1]).toLowerCase().replace(/[^\w\s]/gi, ' ').trim();
+        const gameNameWords = cleanedGameName.split(' ').filter(word => word.length > 0);
+        
+        return searchWords.every(searchWord => {
+          return gameNameWords.some(gameWord => {
+            return getSimilarity(searchWord, gameWord) <= filterThreshold;
+          });
+        });
+      });
 
-          const aStartsWith = aName.startsWith(cleanedSearchTerm);
-          const bStartsWith = bName.startsWith(cleanedSearchTerm);
+      if (filteredGames.length > 0) {
+        const sortedGames = filteredGames.sort((a, b) => {
+          const aName = String(a[1]).toLowerCase();
+          const bName = String(b[1]).toLowerCase();
 
-          if (aStartsWith && !bStartsWith) return -1;
-          if (!aStartsWith && bStartsWith) return 1;
+          const aStartsWith = aName.startsWith(cleanedSearchTerm);
+          const bStartsWith = bName.startsWith(cleanedSearchTerm);
 
-          return 0;
-        });
-        displayGames(sortedGames);
-      } else {
-        displayGames([]);
-      }
-    }
+          if (aStartsWith && !bStartsWith) return -1;
+          if (!aStartsWith && bStartsWith) return 1;
 
-    function displayGames(games) {
-      const tbody = document.getElementById('game-list').querySelector('tbody');
-      tbody.innerHTML = '';
-      games.forEach(game => {
-        const row = document.createElement('tr');
-        const visibleData = [game[0], game[1]];
-        visibleData.forEach(cellData => {
-          const cell = document.createElement('td');
-          cell.textContent = cellData;
-          row.appendChild(cell);
-        });
-        tbody.appendChild(row);
-      });
-    }
+          return 0;
+        });
+        displayGames(sortedGames);
+      } else {
+        displayGames([]);
+      }
+    }
 
-    function displaySagas(sagas) {
-      // Version móvil (acordeón)
-      const sagaListAccordion = document.getElementById('sagas-list');
-      sagaListAccordion.innerHTML = '';
-      sagas.forEach(saga => {
-        const sagaTitle = saga[0];
-        const sagaKeyword = saga[1];
-        const sagaLink = document.createElement('a');
-        sagaLink.textContent = sagaTitle;
-        sagaLink.href = '#';
-        sagaLink.className = 'saga-button';
-        sagaLink.addEventListener('click', (event) => {
-          event.preventDefault();
-          document.getElementById('search-bar').value = sagaKeyword;
-          filterGames(sagaKeyword.toLowerCase());
-          
-          // Cierra el acordeón después de hacer clic
-          const accordionButton = document.querySelector('.sagas-accordion-button');
-          const accordionPanel = accordionButton.nextElementSibling;
-          accordionButton.classList.remove('active');
-          accordionPanel.style.maxHeight = null;
-        });
-        sagaListAccordion.appendChild(sagaLink);
-      });
+    function displayGames(games) {
+      const tbody = document.getElementById('game-list').querySelector('tbody');
+      tbody.innerHTML = '';
+      games.forEach(game => {
+        const row = document.createElement('tr');
+        const visibleData = [game[0], game[1]];
+        visibleData.forEach(cellData => {
+          const cell = document.createElement('td');
+          cell.textContent = cellData;
+          row.appendChild(cell);
+        });
+        tbody.appendChild(row);
+      });
+    }
 
-      // Version de escritorio (tabla)
-      const tbodyDesktop = document.getElementById('sagas-list-desktop').querySelector('tbody');
-      tbodyDesktop.innerHTML = '';
-      sagas.forEach(saga => {
-        const sagaTitle = saga[0];
-        const sagaKeyword = saga[1];
-        const row = document.createElement('tr');
-        const cell = document.createElement('td');
-        const sagaLink = document.createElement('a');
-        sagaLink.textContent = sagaTitle;
-        sagaLink.href = '#';
-        sagaLink.className = 'saga-button';
-        sagaLink.addEventListener('click', (event) => {
-          event.preventDefault();
-          document.getElementById('search-bar').value = sagaKeyword;
-          filterGames(sagaKeyword.toLowerCase());
-        });
-        cell.appendChild(sagaLink);
-        row.appendChild(cell);
-        tbodyDesktop.appendChild(row);
-      });
-    }
+    function displaySagas(sagas) {
+      // Version móvil (acordeón)
+      const sagaListAccordion = document.getElementById('sagas-list');
+      sagaListAccordion.innerHTML = '';
+      sagas.forEach(saga => {
+        const sagaTitle = saga[0];
+        const sagaKeyword = saga[1];
+        const sagaLink = document.createElement('a');
+        sagaLink.textContent = sagaTitle;
+        sagaLink.href = '#';
+        sagaLink.className = 'saga-button';
+        sagaLink.addEventListener('click', (event) => {
+          event.preventDefault();
+          document.getElementById('search-bar').value = sagaKeyword;
+          filterGames(sagaKeyword.toLowerCase());
+          
+          // Cierra el acordeón después de hacer clic
+          const accordionButton = document.querySelector('.sagas-accordion-button');
+          const accordionPanel = accordionButton.nextElementSibling;
+          accordionButton.classList.remove('active');
+          accordionPanel.style.maxHeight = null;
+        });
+        sagaListAccordion.appendChild(sagaLink);
+      });
 
-    function findSuggestion(searchTerm) {
-      const searchWords = searchTerm.split(' ').filter(word => word.length > 0);
-      const suggestedWords = [];
-      let hasMisspelledWord = false;
-      const suggestionThreshold = 2;
+      // Version de escritorio (tabla)
+      const tbodyDesktop = document.getElementById('sagas-list-desktop').querySelector('tbody');
+      tbodyDesktop.innerHTML = '';
+      sagas.forEach(saga => {
+        const sagaTitle = saga[0];
+        const sagaKeyword = saga[1];
+        const row = document.createElement('tr');
+        const cell = document.createElement('td');
+        const sagaLink = document.createElement('a');
+        sagaLink.textContent = sagaTitle;
+        sagaLink.href = '#';
+        sagaLink.className = 'saga-button';
+        sagaLink.addEventListener('click', (event) => {
+          event.preventDefault();
+          document.getElementById('search-bar').value = sagaKeyword;
+          filterGames(sagaKeyword.toLowerCase());
+        });
+        cell.appendChild(sagaLink);
+        row.appendChild(cell);
+        tbodyDesktop.appendChild(row);
+      });
+    }
 
-      searchWords.forEach(searchWord => {
-        let bestMatch = searchWord;
-        let minDistance = 999;
-        
-        vocabulary.forEach(dictWord => {
-            const distance = getSimilarity(searchWord, dictWord);
-            if (distance < minDistance) {
-                minDistance = distance;
-                bestMatch = dictWord;
-            }
-        });
-        
-        if (minDistance > 0 && minDistance <= suggestionThreshold) {
-            hasMisspelledWord = true;
-            suggestedWords.push(bestMatch);
-        } else {
-            suggestedWords.push(searchWord);
-        }
-      });
+    function findSuggestion(searchTerm) {
+      const searchWords = searchTerm.split(' ').filter(word => word.length > 0);
+      const suggestedWords = [];
+      let hasMisspelledWord = false;
+      const suggestionThreshold = 2;
 
-      const suggestedPhrase = suggestedWords.join(' ').toUpperCase();
-      
-      if (hasMisspelledWord) {
-        const cleanedSuggestedPhrase = suggestedPhrase.toLowerCase().replace(/[^\w\s]/gi, ' ').trim();
-        const suggestionExists = gamesData.some(game => {
-          const cleanedGameName = String(game[1]).toLowerCase().replace(/[^\w\s]/gi, ' ').trim();
-          return cleanedGameName.includes(cleanedSuggestedPhrase);
-        });
-        
-        if (suggestionExists) {
-          return suggestedPhrase;
-        }
-      }
-      
-      return null;
-    }
+      searchWords.forEach(searchWord => {
+        let bestMatch = searchWord;
+        let minDistance = 999;
+        
+        vocabulary.forEach(dictWord => {
+            const distance = getSimilarity(searchWord, dictWord);
+            if (distance < minDistance) {
+                minDistance = distance;
+                bestMatch = dictWord;
+            }
+        });
+        
+        if (minDistance > 0 && minDistance <= suggestionThreshold) {
+            hasMisspelledWord = true;
+            suggestedWords.push(bestMatch);
+        } else {
+            suggestedWords.push(searchWord);
+        }
+      });
 
-    // Lógica para el acordeón
-    const accordionButton = document.querySelector('.sagas-accordion-button');
-    if (accordionButton) {
-        accordionButton.addEventListener('click', function() {
-            this.classList.toggle('active');
-            const panel = this.nextElementSibling;
-            if (panel.style.maxHeight) {
-                panel.style.maxHeight = null;
-            } else {
-                panel.style.maxHeight = panel.scrollHeight + "px";
-            }
-        });
-    }
+      const suggestedPhrase = suggestedWords.join(' ').toUpperCase();
+      
+      if (hasMisspelledWord) {
+        const cleanedSuggestedPhrase = suggestedPhrase.toLowerCase().replace(/[^\w\s]/gi, ' ').trim();
+        const suggestionExists = gamesData.some(game => {
+          const cleanedGameName = String(game[1]).toLowerCase().replace(/[^\w\s]/gi, ' ').trim();
+          return cleanedGameName.includes(cleanedSuggestedPhrase);
+        });
+        
+        if (suggestionExists) {
+          return suggestedPhrase;
+        }
+      }
+      
+      return null;
+    }
 
-    loadData();
-  </script>
+    // Lógica para el acordeón
+    const accordionButton = document.querySelector('.sagas-accordion-button');
+    if (accordionButton) {
+        accordionButton.addEventListener('click', function() {
+            this.classList.toggle('active');
+            const panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        });
+    }
+
+    loadData();
+  </script>
 
 </body>
 </html>
