@@ -303,7 +303,19 @@
   </div>
 
   <script>
-    // URLs de los archivos CSV
+  	// BOTON VOLVER
+    function goBack() {
+      // Si hay más de una entrada en el historial, vuelve a la página anterior
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        // Si no hay historial anterior, intenta cerrar la pestaña actual.
+        // ADVERTENCIA: Esta función puede ser bloqueada por los navegadores por motivos de seguridad
+        window.close();
+      }
+    }
+	
+	// URLs de los archivos CSV
     const gamesUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQOta0Iul7oMjqb1dDNjWdBOtkHLdJvb6TycdY85ffXlopRJx5qLAjbpmQ6CfqOifWqUxygez6LSYig/pub?output=csv';
     const sagasUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRTgF5vwoRBaohdO5YqZjZf8mUOMZ81NXMUpY9M_G6Jz6uPy8KtFTytGe0YN9D0GbCIGHJ_N9iJvJ3H/pub?output=csv';
 
