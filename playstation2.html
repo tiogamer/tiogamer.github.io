@@ -6,6 +6,34 @@
   <title>Catálogo de Juegos PLAYSTATION 2</title>
   <style>
     /* ESTILOS (CSS) */
+	
+	/* Estilo para el botón "Volver" con estilo moderno */
+    .back-button {
+      background-color: #ffffff; /* Fondo blanco */
+      color: #1a73e8; /* Texto azul de marca */
+      border: 1px solid #dadce0;
+      padding: 10px 18px; /* Un poco más de padding */
+      margin-bottom: 15px;
+      border-radius: 24px; /* Esquinas más redondeadas (estilo "píldora") */
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s;
+      display: flex; /* Para centrar el ícono y el texto */
+      align-items: center;
+      gap: 5px; /* Espacio entre el ícono y el texto */
+    }
+
+    .back-button:hover {
+      background-color: #f6f8fa; /* Gris muy sutil al pasar el mouse */
+      border-color: #c5d0e3; /* Borde se oscurece ligeramente */
+      box-shadow: 0 1px 3px rgba(60, 64, 67, 0.1); /* Sombra sutil */
+    }
+
+    .back-button:active {
+        background-color: #e8f0fe; /* Azul claro al hacer clic */
+    }
+	
     body {
       font-family: 'Roboto', sans-serif;
       background-color: #ffffff;
@@ -226,6 +254,10 @@
   </style>
 </head>
 <body>
+
+<button class="back-button" onclick="goBack()">
+  <span style="font-size: 16px; line-height: 1;">&#x2190;</span> Volver
+</button>
 
   <div class="main-wrapper">
     <h2>Catálogo de Juegos PS2</h2>
